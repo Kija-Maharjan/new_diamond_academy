@@ -1,6 +1,6 @@
 {
-  "buildCommand": "npm install && npm run build && composer install --optimize-autoloader --no-dev",
-  "outputDirectory": "public",
+  "buildCommand": "bash build.sh",
+  "outputDirectory": "laravel/public",
   "env": {
     "APP_NAME": "Diamond Academy",
     "APP_ENV": "production",
@@ -9,12 +9,8 @@
   },
   "routes": [
     {
-      "src": "/public/(.*)",
-      "dest": "/public/$1"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/public/index.php"
+      "dest": "/laravel/public/index.php"
     }
   ]
 }
