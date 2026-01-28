@@ -2,7 +2,6 @@
   "buildCommand": "composer install --optimize-autoloader --no-dev && npm install && npm run build",
   "outputDirectory": "public",
   "env": {
-    "APP_KEY": "@APP_KEY",
     "APP_NAME": "Diamond Academy",
     "APP_ENV": "production",
     "APP_DEBUG": "false",
