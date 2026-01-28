@@ -1,0 +1,31 @@
+{
+  "framework": "laravel",
+  "buildCommand": "composer install && npm install && npm run build",
+  "devCommand": "php artisan serve",
+  "env": {
+    "APP_KEY": "@APP_KEY",
+    "APP_NAME": "Diamond Academy",
+    "APP_ENV": "production",
+    "APP_DEBUG": "false",
+    "LOG_CHANNEL": "stack"
+  },
+  "php": {
+    "version": "8.2"
+  },
+  "functions": {
+    "api/index.php": {
+      "runtime": "php:8.2"
+    }
+  },
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/public/index.php"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/index.php"
+    }
+  ],
+  "regions": ["iad1"]
+}
