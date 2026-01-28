@@ -1,4 +1,9 @@
 {
-  "buildCommand": "cd laravel && composer install --no-dev && cd .. && npm install && npm run build",
-  "outputDirectory": "laravel/public"
+  "outputDirectory": "laravel/public",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/laravel/public/index.php"
+    }
+  ]
 }
