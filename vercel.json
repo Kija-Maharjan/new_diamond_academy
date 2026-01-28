@@ -9,23 +9,14 @@
     "APP_DEBUG": "false",
     "LOG_CHANNEL": "stack"
   },
-  "php": {
-    "version": "8.2"
-  },
-  "functions": {
-    "api/index.php": {
-      "runtime": "php:8.2"
-    }
-  },
   "routes": [
     {
-      "src": "/",
-      "dest": "/public/index.php"
+      "src": "/public/(.*)",
+      "dest": "/public/$1"
     },
     {
       "src": "/(.*)",
       "dest": "/public/index.php"
     }
-  ],
-  "regions": ["iad1"]
+  ]
 }
