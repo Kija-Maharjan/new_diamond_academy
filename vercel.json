@@ -1,18 +1,4 @@
 {
-  "buildCommand": "npm install && npm run build && cd laravel && composer install --no-dev --optimize-autoloader",
-  "outputDirectory": "laravel/public",
-  "routes": [
-    {
-      "src": "/(.*)/$",
-      "dest": "/laravel/public/index.php?$1"
-    },
-    {
-      "src": "/",
-      "dest": "/laravel/public/index.php"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/laravel/public/index.php"
-    }
-  ]
+  "buildCommand": "cd laravel && composer install --no-dev && cd .. && npm install && npm run build",
+  "outputDirectory": "laravel/public"
 }
