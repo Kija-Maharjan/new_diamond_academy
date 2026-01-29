@@ -1,10 +1,10 @@
 services:
   - type: web
     name: new_diamond_academy
-    runtime: php
     plan: free
-    buildCommand: cd laravel && composer install --no-dev
-    startCommand: cd laravel && php artisan serve --host 0.0.0.0
+    dockerfilePath: ./Dockerfile
+    # Use the render entrypoint which waits for DB and runs migrations, then serves on $PORT
+    startCommand: /usr/local/bin/render-entrypoint.sh
     routes:
       - path: /
         dest: /laravel/public/index.php
@@ -16,3 +16,10 @@ services:
           name: app_key
       - key: LOG_CHANNEL
         value: stack
+
+# Optional: provision a managed Postgres database on Render. Adjust region/plan as desired.
+databases:
+  - name: new_diamond_academy_db
+    plan: starter
+    region: oregon
+    type: postgresql
