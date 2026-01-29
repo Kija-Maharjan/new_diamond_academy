@@ -18,105 +18,35 @@
         <!-- Sidebar -->
         <nav class="sidebar" id="sidebar">
             <div class="sidebar-section">
-                <div class="sidebar-section-title">Getting Started</div>
-                <a href="#introduction" class="sidebar-item active">Introduction</a>
-                <a href="#installation" class="sidebar-item">Installation</a>
-                <a href="#configuration" class="sidebar-item">Configuration</a>
+                <div class="sidebar-section-title">Main</div>
+                <a href="/" class="sidebar-item">Start Page</a>
+                @auth
+                    @if(auth()->user()->is_admin)
+                        <a href="{{ route('admin') }}" class="sidebar-item">Admin Panel</a>
+                    @endif
+                @endauth
+                <a href="{{ route('slider') }}" class="sidebar-item">Teacher / Founder Slider</a>
+                <a href="{{ route('news.index') }}" class="sidebar-item">Student News</a>
+                <a href="{{ route('recommendations.create') }}" class="sidebar-item">Send Recommendation</a>
             </div>
 
             <div class="sidebar-section">
-                <div class="sidebar-section-title">Core Concepts</div>
-                <a href="#routing" class="sidebar-item">Routing</a>
-                <a href="#controllers" class="sidebar-item">Controllers</a>
-                <a href="#models" class="sidebar-item">Models</a>
-                <a href="#views" class="sidebar-item">Views</a>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="sidebar-section-title">Advanced Topics</div>
-                <a href="#authentication" class="sidebar-item">Authentication</a>
-                <a href="#middleware" class="sidebar-item">Middleware</a>
-                <a href="#database" class="sidebar-item">Database</a>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="sidebar-section-title">Resources</div>
-                <a href="#examples" class="sidebar-item">Examples</a>
-                <a href="#api" class="sidebar-item">API Reference</a>
-                <a href="#faq" class="sidebar-item">FAQ</a>
+                <div class="sidebar-section-title">Account</div>
+                @guest
+                    <a href="{{ route('login') }}" class="sidebar-item">Log in</a>
+                @else
+                    <div class="sidebar-item">Signed in as {{ auth()->user()->name }}</div>
+                    <form method="POST" action="{{ route('logout') }}" style="margin:0; padding:0">
+                        @csrf
+                        <button type="submit" class="sidebar-item" style="background:none; border:none; padding:0; text-align:left;">Logout</button>
+                    </form>
+                @endguest
             </div>
         </nav>
 
         <!-- Main Content -->
         <main class="main-content" id="mainContent">
-            <div class="content-wrapper">
-                <h1 class="doc-title">Welcome to the Documentation</h1>
-
-                <div class="doc-section" id="introduction">
-                    <h2>Introduction</h2>
-                    <p>Welcome to our comprehensive documentation. This guide will help you understand and use our system effectively.</p>
-                    
-                    <div class="tip">
-                        <strong>💡 Tip:</strong> Use the sidebar menu to navigate through different sections quickly.
-                    </div>
-                </div>
-
-                <div class="doc-section" id="installation">
-                    <h2>Installation</h2>
-                    <p>Follow these steps to install the system:</p>
-                    
-                    <h3>Prerequisites</h3>
-                    <p>Before you begin, ensure you have the following installed:</p>
-                    <ul>
-                        <li>PHP 8.1 or higher</li>
-                        <li>Composer</li>
-                        <li>MySQL or PostgreSQL</li>
-                    </ul>
-
-                    <h3>Installation Steps</h3>
-                    <div class="code-block">
-                        <code>
-composer create-project laravel/laravel my-project<br>
-cd my-project<br>
-php artisan serve
-                        </code>
-                    </div>
-
-                    <div class="note">
-                        <strong>⚠️ Note:</strong> Make sure to configure your .env file before running migrations.
-                    </div>
-                </div>
-
-                <div class="doc-section" id="configuration">
-                    <h2>Configuration</h2>
-                    <p>Configure your application by editing the <code>.env</code> file in the root directory.</p>
-                    
-                    <div class="code-block">
-                        <code>
-DB_CONNECTION=mysql<br>
-DB_HOST=127.0.0.1<br>
-DB_PORT=3306<br>
-DB_DATABASE=your_database<br>
-DB_USERNAME=your_username<br>
-DB_PASSWORD=your_password
-                        </code>
-                    </div>
-                </div>
-
-                <div class="doc-section" id="routing">
-                    <h2>Routing</h2>
-                    <p>Routes are defined in the <code>routes/web.php</code> file.</p>
-                    
-                    <h3>Basic Routing</h3>
-                    <div class="code-block">
-                        <code>
-Route::get('/home', function () {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return view('home');<br>
-});
-                        </code>
-                    </div>
-                </div>
-            </div>
+            @yield('content')
         </main>
     </div>
 

@@ -13,7 +13,6 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
-
 /**
  * Record the start time of the application for performance monitoring
  */

@@ -1,10 +1,41 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
-    return view('ui', [
+    return view('home', [
         'title' => 'Diamond Academy',
-        'headerTitle' => 'Diamond Academy Documentation'
+        'headerTitle' => 'Diamond Academy'
     ]);
 });
+
+// Auth
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Admin panel (use admin middleware)
+Route::get('/admin', function () {
+    return view('admin');
+})->middleware('admin')->name('admin');
+
+// Teacher/Founder slider
+Route::get('/slider', function () {
+    return view('slider');
+})->name('slider');
+
+// News
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::post('/news', [NewsController::class, 'store'])->name('news.store');
+Route::get('/news/{news}/edit', [NewsController::class, 'edit'])->name('news.edit');
+Route::put('/news/{news}', [NewsController::class, 'update'])->name('news.update');
+Route::delete('/news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
+
+// Recommendations / Suggestions
+use App\Http\Controllers\RecommendationController;
+Route::get('/recommendations/create', [RecommendationController::class, 'create'])->name('recommendations.create');
+Route::post('/recommendations', [RecommendationController::class, 'store'])->name('recommendations.store');
+Route::get('/recommendations', [RecommendationController::class, 'index'])->name('recommendations.index');
+Route::get('/recommendations/{recommendation}/attachment', [RecommendationController::class, 'downloadAttachment'])->name('recommendations.attachment');

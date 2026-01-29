@@ -32,6 +32,10 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    /**
+     * @property int $id
+     * @property bool $is_admin
+     */
 
     /**
      * Get the attributes that should be cast.
