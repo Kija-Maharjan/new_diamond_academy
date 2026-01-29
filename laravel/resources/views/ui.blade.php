@@ -1,83 +1,128 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Documentation' }}</title>
-    <link rel="stylesheet" href="/css/ui.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ $title ?? 'Diamond Academy' }}</title>
+
+    <!-- Bootstrap CSS (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-..." crossorigin="anonymous">
+
+    <!-- Optional custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    <style>
+        body { padding-top: 56px; }
+        .sidebar-offcanvas { width: 250px; }
+        .news-card img { max-height: 300px; object-fit: cover; }
+        /* Ensure offcanvas and its backdrop are visually behind the navbar */
+        .navbar { z-index: 1200 !important; }
+        .offcanvas, .offcanvas-backdrop { z-index: 1000 !important; }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <div class="header">
-        <div class="header-title">{{ $headerTitle ?? 'My Documentation' }}</div>
-        <button class="toggle-btn" onclick="toggleSidebar()">☰ Toggle Menu</button>
-    </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/" id="brandTitle" title="Right-click to toggle menu">Diamond Academy</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Sidebar -->
-        <nav class="sidebar" id="sidebar">
-            <div class="sidebar-section">
-                <div class="sidebar-section-title">Main</div>
-                <a href="/" class="sidebar-item">Start Page</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('slider') }}">Slider</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('news.index') }}">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('recommendations.create') }}">Recommend</a></li>
+                </ul>
+
+                <ul class="navbar-nav ms-auto">
+                    @guest
+                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                    @else
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ auth()->user()->name }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                                @if(auth()->user()->is_admin)
+                                    <li><a class="dropdown-item" href="{{ route('admin') }}">Admin Panel</a></li>
+                                @endif
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button class="dropdown-item" type="submit">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    @endguest
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Offcanvas Sidebar -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasSidebarLabel">Menu</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav flex-column">
+                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Start Page</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('slider') }}">Teacher / Founder Slider</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('news.index') }}">Student News</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('recommendations.create') }}">Send Recommendation</a></li>
                 @auth
                     @if(auth()->user()->is_admin)
-                        <a href="{{ route('admin') }}" class="sidebar-item">Admin Panel</a>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin') }}">Admin Panel</a></li>
                     @endif
                 @endauth
-                <a href="{{ route('slider') }}" class="sidebar-item">Teacher / Founder Slider</a>
-                <a href="{{ route('news.index') }}" class="sidebar-item">Student News</a>
-                <a href="{{ route('recommendations.create') }}" class="sidebar-item">Send Recommendation</a>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="sidebar-section-title">Account</div>
-                @guest
-                    <a href="{{ route('login') }}" class="sidebar-item">Log in</a>
-                @else
-                    <div class="sidebar-item">Signed in as {{ auth()->user()->name }}</div>
-                    <form method="POST" action="{{ route('logout') }}" style="margin:0; padding:0">
-                        @csrf
-                        <button type="submit" class="sidebar-item" style="background:none; border:none; padding:0; text-align:left;">Logout</button>
-                    </form>
-                @endguest
-            </div>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="main-content" id="mainContent">
-            @yield('content')
-        </main>
+            </ul>
+        </div>
     </div>
 
+    <main class="container mt-4">
+        <!-- Flash messages -->
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+        @if(session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach($errors->all() as $e)
+                        <li>{{ $e }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @yield('content')
+    </main>
+
+    <!-- Bootstrap JS (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
+
     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const mainContent = document.getElementById('mainContent');
-            
-            sidebar.classList.toggle('hidden');
-            sidebar.classList.toggle('visible');
-            mainContent.classList.toggle('expanded');
-        }
+        // Right-click the brand to toggle the offcanvas menu (keeps it visually behind the navbar)
+        document.addEventListener('DOMContentLoaded', function() {
+            var brand = document.getElementById('brandTitle');
+            if (!brand) return;
 
-        // Active link highlighting
-        document.querySelectorAll('.sidebar-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+            brand.addEventListener('contextmenu', function(e) {
+                e.preventDefault(); // suppress browser context menu on brand
+                var offcanvasEl = document.getElementById('offcanvasSidebar');
+                if (!offcanvasEl) return;
+                var instance = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+                if (offcanvasEl.classList.contains('show')) {
+                    instance.hide();
+                } else {
+                    instance.show();
                 }
             });
         });

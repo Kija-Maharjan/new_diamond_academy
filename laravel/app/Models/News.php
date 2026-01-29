@@ -8,12 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property int $user_id
- * @property string|null $image
- */
-
-/**
- * @property int $id
- * @property int $user_id
  * @property string $title
  * @property string $body
  * @property string|null $image
