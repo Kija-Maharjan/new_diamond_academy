@@ -1,0 +1,22 @@
+# Node and PHP deps
+laravel/node_modules
+node_modules
+vendor
+
+# Laravel storage and runtime
+storage
+/public/storage
+.env
+.env.*
+
+# Git and editor cruft
+.git
+.gitignore
+.vscode
+*.log
+.DS_Store
+
+# Dockerfile build artifacts
+**/npm-debug.log
+**/yarn-error.log
+**/package-lock.json

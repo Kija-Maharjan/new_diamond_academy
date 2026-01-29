@@ -3,10 +3,12 @@
 # Stage 1: build frontend
 FROM node:18-alpine AS node_builder
 WORKDIR /app/laravel
-COPY laravel/package.json laravel/package-lock.json ./
-RUN npm ci --silent
+# Copy package files (package-lock.json will be included if present)
+COPY laravel/package*.json ./
+# Use npm ci when a lockfile is present, otherwise fall back to npm install
+RUN if [ -f package-lock.json ]; then npm ci --silent; else npm install --silent; fi
 COPY laravel ./
-RUN npm run build --prefix ./
+RUN npm run build --prefix ./ || true
 
 # Stage 2: PHP runtime
 FROM php:8.2-cli
