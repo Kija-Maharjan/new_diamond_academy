@@ -32,15 +32,15 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY . /var/www/html
 
 # Copy built frontend assets from node stage (if produced)
-COPY --from=node_builder /app/laravel/public /var/www/html/public
+COPY --from=node_builder /app/laravel/public /var/www/html/laravel/public
 
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+# Install PHP dependencies (run in the laravel subdirectory)
+RUN cd laravel && composer install --no-dev --optimize-autoloader --no-interaction
 
 # Ensure storage and bootstrap cache folders exist
 RUN php -r "file_exists('bootstrap/cache') || mkdir('bootstrap/cache', 0755, true);"
 RUN php -r "file_exists('storage') || mkdir('storage', 0755, true);"
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/laravel/storage /var/www/html/laravel/bootstrap/cache
 
 # Copy render entrypoint and make executable
 COPY scripts/render-entrypoint.sh /usr/local/bin/render-entrypoint.sh
