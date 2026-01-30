@@ -17,7 +17,7 @@
 - APP_ENV=production
 - APP_DEBUG=false
 - APP_KEY=base64:...
-- APP_URL=`https://your-service.onrender.com` (replace `your-service` with your actual service name)
+- APP_URL=https://your-service.onrender.com (replace `your-service` with your actual service name)
 - LOG_CHANNEL=stack
 - DB settings: Render-managed Postgres will provide `DATABASE_URL` automatically when you create a DB, or set it manually.
 - If using S3: FILESYSTEM_DRIVER=s3 and set `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_DEFAULT_REGION`, `AWS_BUCKET`, and `AWS_URL`.
