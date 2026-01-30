@@ -6,8 +6,8 @@ use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('home', [
-        'title' => 'Diamond Academy',
-        'headerTitle' => 'Diamond Academy'
+        'title' => 'New Diamond Academy',
+        'headerTitle' => 'New Diamond Academy'
     ]);
 });
 

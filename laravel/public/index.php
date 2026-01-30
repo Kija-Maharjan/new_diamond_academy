@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Diamond Academy - Laravel Application Entry Point
+ * New Diamond Academy - Laravel Application Entry Point
  *
- * This is the entry point for all requests to the Diamond Academy application.
+ * This is the entry point for all requests to the New Diamond Academy application.
  * It handles the bootstrapping of the Laravel framework and processes incoming requests.
  *
- * @package Diamond Academy
- * @author Diamond Academy Team
+ * @package New Diamond Academy
+ * @author New Diamond Academy Team
  * @version 1.0.0
  */
 
