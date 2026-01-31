@@ -64,4 +64,20 @@ class RecommendationController extends Controller
 
         return Storage::download($recommendation->attachment_path);
     }
+
+        // delete recommendation (admin only)
+        public function destroy($id)
+        {
+            if (!Auth::check() || !Auth::user()->is_admin) abort(403);
+
+            $recommendation = Recommendation::findOrFail($id);
+
+            if ($recommendation->attachment_path && Storage::exists($recommendation->attachment_path)) {
+                Storage::delete($recommendation->attachment_path);
+            }
+
+            $recommendation->delete();
+
+            return back()->with('success', 'Recommendation deleted successfully.');
+        }
 }

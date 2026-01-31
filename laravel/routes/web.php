@@ -14,12 +14,15 @@ Route::get('/', function () {
 // Auth
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Admin panel (use admin middleware)
 Route::get('/admin', function () {
     return view('admin');
 })->middleware('admin')->name('admin');
+Route::post('/admin/toggle-admin/{user}', [AuthController::class, 'toggleAdmin'])->middleware('admin')->name('admin.toggle-admin');
 
 // Teacher/Founder slider
 Route::get('/slider', function () {
@@ -39,3 +42,4 @@ Route::get('/recommendations/create', [RecommendationController::class, 'create'
 Route::post('/recommendations', [RecommendationController::class, 'store'])->name('recommendations.store');
 Route::get('/recommendations', [RecommendationController::class, 'index'])->name('recommendations.index');
 Route::get('/recommendations/{recommendation}/attachment', [RecommendationController::class, 'downloadAttachment'])->name('recommendations.attachment');
+Route::delete('/recommendations/{id}', [RecommendationController::class, 'destroy'])->middleware('admin')->name('recommendations.delete');

@@ -1,30 +1,136 @@
 @extends('ui')
 
 @section('content')
-<div class="d-flex justify-content-center">
-    <div class="card w-100" style="max-width:420px;">
-        <div class="card-body">
-            <h4 class="card-title mb-3">Login</h4>
+<div class="d-flex justify-content-center align-items-center" style="min-height: 60vh;">
+    <div class="card w-100" style="max-width: 450px; border: 0; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+        <div class="card-body p-5">
+            <!-- Header -->
+            <div class="text-center mb-4">
+                <h2 class="fw-bold mb-2" style="color: #0d6efd;">
+                    <i class="fas fa-sign-in-alt me-2"></i>Welcome Back
+                </h2>
+                <p class="text-muted">Sign in to your account to continue</p>
+            </div>
+
             @if($errors->any())
-                <div class="alert alert-danger">{{ $errors->first() }}</div>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <strong>Login Failed!</strong>
+                    <div>{{ $errors->first() }}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             @endif
-            <form method="POST" action="{{ route('login.post') }}">
+
+            <form method="POST" action="{{ route('login.post') }}" class="auth-form">
                 @csrf
+                
+                <!-- Email Input -->
                 <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input class="form-control" type="email" name="email" value="{{ old('email') }}" required>
+                    <label class="form-label fw-bold" for="email">
+                        <i class="fas fa-envelope me-2" style="color: #0d6efd;"></i>Email Address
+                    </label>
+                    <input 
+                        class="form-control form-control-lg" 
+                        type="email" 
+                        id="email"
+                        name="email" 
+                        value="{{ old('email') }}" 
+                        placeholder="you@example.com"
+                        required
+                        style="border-radius: 8px; border: 2px solid #e9ecef; transition: all 0.3s ease;"
+                    >
                 </div>
+
+                <!-- Password Input -->
                 <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input class="form-control" type="password" name="password" required>
+                    <label class="form-label fw-bold" for="password">
+                        <i class="fas fa-lock me-2" style="color: #0d6efd;"></i>Password
+                    </label>
+                    <input 
+                        class="form-control form-control-lg" 
+                        type="password" 
+                        id="password"
+                        name="password" 
+                        placeholder="Enter your password"
+                        required
+                        style="border-radius: 8px; border: 2px solid #e9ecef; transition: all 0.3s ease;"
+                    >
                 </div>
-                <div class="mb-3 form-check">
-                    <input class="form-check-input" type="checkbox" name="remember" id="remember">
-                    <label class="form-check-label" for="remember">Remember me</label>
+
+                <!-- Remember Me Checkbox -->
+                <div class="mb-4 form-check">
+                    <input 
+                        class="form-check-input" 
+                        type="checkbox" 
+                        name="remember" 
+                        id="remember"
+                        style="cursor: pointer; width: 20px; height: 20px;"
+                    >
+                    <label class="form-check-label" for="remember" style="cursor: pointer;">
+                        <i class="fas fa-check-square me-1" style="color: #0d6efd;"></i>Remember me
+                    </label>
                 </div>
-                <button class="btn btn-primary w-100" type="submit">Login</button>
+
+                <!-- Login Button -->
+                <button 
+                    class="btn btn-primary w-100 btn-lg fw-bold" 
+                    type="submit"
+                    style="border-radius: 8px; background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%); border: 0; padding: 12px; transition: all 0.3s ease;"
+                >
+                    <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                </button>
             </form>
+
+            <!-- Divider -->
+            <div class="my-4 text-center">
+                <hr>
+                <span class="text-muted small">New to Academy?</span>
+            </div>
+
+            <!-- Registration Link -->
+            <div class="text-center">
+                <p class="mb-3 text-muted">Don't have an account?</p>
+                <a 
+                    href="{{ route('register') }}" 
+                    class="btn btn-outline-primary w-100 btn-lg fw-bold"
+                    style="border-radius: 8px; border: 2px solid #0d6efd; transition: all 0.3s ease;"
+                >
+                    <i class="fas fa-user-plus me-2"></i>Create New Account
+                </a>
+            </div>
+
+            <!-- Footer Info -->
+            <p class="text-center text-muted mt-4 small">
+                <i class="fas fa-lock me-1"></i>Your data is secure and encrypted
+            </p>
         </div>
     </div>
 </div>
+
+<style>
+    .form-control:focus {
+        border-color: #0d6efd !important;
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25) !important;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .auth-form {
+        animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
 @endsection

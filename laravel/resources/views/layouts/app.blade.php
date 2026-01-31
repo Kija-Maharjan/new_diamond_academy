@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    "<title img src="../nda_logo.png" alt="New Diamond Academy Logo" width="50" height="50"></title>
-    <title>@yield('title', 'My Laravel App')</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ asset('storage/ndalogo.png') }}">
+    <title>@yield('title', 'New Diamond Academy')</title>
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
 
     @yield('head')
 </head>
