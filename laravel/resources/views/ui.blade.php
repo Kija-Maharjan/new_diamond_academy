@@ -293,7 +293,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
             border: 0;
             color: white;
             cursor: pointer;
@@ -303,11 +303,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            text-decoration: none;
         }
 
         .theme-toggle:hover {
-            transform: scale(1.1) rotate(180deg);
+            transform: scale(1.1);
             box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+            color: white;
         }
 
         /* Dark mode support */
@@ -343,122 +345,84 @@
     </style>
 </head>
 <body>
+    <!-- Navbar Collapse Content -->
+    <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
+        <div class="bg-primary p-4">
+            <h5 class="text-white h4"><i class="fas fa-bars me-2"></i>Navigation</h5>
+            <ul class="nav flex-column gap-2">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url('/') }}">
+                        <i class="fas fa-home me-2"></i>Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ route('slider') }}">
+                        <i class="fas fa-images me-2"></i>Slider
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ route('news.index') }}">
+                        <i class="fas fa-newspaper me-2"></i>News
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ route('recommendations.create') }}">
+                        <i class="fas fa-star me-2"></i>Recommend
+                    </a>
+                </li>
+                @guest
+                    <li class="nav-item">
+                        <hr class="my-2 border-light">
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ route('login') }}">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login
+                        </a>
+                    </li>
+                @endguest
+            </ul>
+        </div>
+    </div>
+
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <nav class="navbar navbar-dark bg-primary fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
                 <i class="fas fa-graduation-cap me-2"></i>New Diamond Academy
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar" title="Toggle Menu">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/') }}">
-                            <i class="fas fa-home me-1"></i>Home
+            @auth
+                <div class="ms-auto d-none d-lg-block">
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle me-1"></i>{{ auth()->user()->name }}
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('slider') }}">
-                            <i class="fas fa-images me-1"></i>Slider
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('news.index') }}">
-                            <i class="fas fa-newspaper me-1"></i>News
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('recommendations.create') }}">
-                            <i class="fas fa-star me-1"></i>Recommend
-                        </a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav ms-auto">
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">
-                                <i class="fas fa-sign-in-alt me-1"></i>Login
-                            </a>
-                        </li>
-                    @else
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user-circle me-1"></i>{{ auth()->user()->name }}
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
-                                @if(auth()->user()->is_admin)
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('admin') }}">
-                                            <i class="fas fa-lock me-2"></i>Admin Panel
-                                        </a>
-                                    </li>
-                                    <li><hr class="dropdown-divider"></li>
-                                @endif
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                            @if(auth()->user()->is_admin)
                                 <li>
-                                    <form method="POST" action="{{ route('logout') }}" class="m-0">
-                                        @csrf
-                                        <button class="dropdown-item" type="submit">
-                                            <i class="fas fa-sign-out-alt me-2"></i>Logout
-                                        </button>
-                                    </form>
+                                    <a class="dropdown-item" href="{{ route('admin') }}">
+                                        <i class="fas fa-lock me-2"></i>Admin Panel
+                                    </a>
                                 </li>
-                            </ul>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
+                                <li><hr class="dropdown-divider"></li>
+                            @endif
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}" class="m-0">
+                                    @csrf
+                                    <button class="dropdown-item" type="submit">
+                                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            @endauth
         </div>
-    </nav>
 
-    <!-- Offcanvas Sidebar -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
-        <div class="offcanvas-header bg-primary text-white">
-            <h5 class="offcanvas-title" id="offcanvasSidebarLabel">
-                <i class="fas fa-bars me-2"></i>Menu
-            </h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <ul class="nav flex-column gap-2">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/') }}">
-                        <i class="fas fa-home me-2"></i>Start Page
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('slider') }}">
-                        <i class="fas fa-images me-2"></i>Teacher / Founder Slider
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('news.index') }}">
-                        <i class="fas fa-newspaper me-2"></i>Student News
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('recommendations.create') }}">
-                        <i class="fas fa-star me-2"></i>Send Recommendation
-                    </a>
-                </li>
-                @auth
-                    @if(auth()->user()->is_admin)
-                        <li class="nav-item">
-                            <hr class="my-2">
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin') }}">
-                                <i class="fas fa-lock me-2"></i>Admin Panel
-                            </a>
-                        </li>
-                    @endif
-                @endauth
-            </ul>
-        </div>
-    </div>
 
     <!-- Main Content -->
     <main class="container mt-4 pb-5">
@@ -493,32 +457,132 @@
         @yield('content')
     </main>
 
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">
-        <i class="fas fa-moon"></i>
-    </button>
+    <!-- Bottom Navigation / Footer -->
+    <footer class="bg-primary text-white py-3 mt-5">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <!-- Go Back Button -->
+                <div class="col-auto">
+                    <button class="btn btn-light btn-sm" onclick="window.history.back()" title="Go Back">
+                        <i class="fas fa-arrow-left me-1"></i>Go Back
+                    </button>
+                </div>
 
+                <!-- Navigation Links -->
+                <div class="col">
+                    <nav class="d-flex gap-3 flex-wrap ms-3">
+                        <a href="{{ url('/') }}" class="text-white text-decoration-none small">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                        <a href="{{ route('slider') }}" class="text-white text-decoration-none small">
+                            <i class="fas fa-images me-1"></i>Slider
+                        </a>
+                        <a href="{{ route('news.index') }}" class="text-white text-decoration-none small">
+                            <i class="fas fa-newspaper me-1"></i>News
+                        </a>
+                        <a href="{{ route('recommendations.create') }}" class="text-white text-decoration-none small">
+                            <i class="fas fa-star me-1"></i>Recommend
+                        </a>
+                        @guest
+                            <a href="{{ route('login') }}" class="text-white text-decoration-none small">
+                                <i class="fas fa-sign-in-alt me-1"></i>Login
+                            </a>
+                        @else
+                            @if(auth()->user()->is_admin)
+                                <a href="{{ route('admin') }}" class="text-white text-decoration-none small">
+                                    <i class="fas fa-lock me-1"></i>Admin
+                                </a>
+                            @endif
+                        @endguest
+                    </nav>
+                </div>
+
+                <!-- Theme Toggle at Right -->
+                <div class="col-auto">
+                    <button class="btn btn-light btn-sm theme-toggle-bottom" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center mt-3 small text-white-50">
+                <p class="mb-0">&copy; 2026 New Diamond Academy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button (Floating) -->
+    <a href="{{ route('login') }}" class="theme-toggle" title="Join with us">
+        <i class="fas fa-user-plus"></i>
+    </a>
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     
     <!-- Custom JS for animations and interactivity -->
     <script>
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('themeToggle');
-        const html = document.documentElement;
-        
-        // Check for saved theme preference or default to 'light'
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        if (currentTheme === 'dark') {
-            html.style.colorScheme = 'dark';
-            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        // Initialize theme on page load
+        function initializeTheme() {
+            const html = document.documentElement;
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            
+            // Apply the theme
+            if (savedTheme === 'dark') {
+                html.setAttribute('data-bs-theme', 'dark');
+                html.style.colorScheme = 'dark';
+            } else {
+                html.removeAttribute('data-bs-theme');
+                html.style.colorScheme = 'light';
+            }
+            
+            updateToggleButtons(savedTheme);
         }
-        
-        themeToggle.addEventListener('click', function() {
-            const newTheme = html.style.colorScheme === 'dark' ? 'light' : 'dark';
-            html.style.colorScheme = newTheme;
+
+        // Update theme toggle buttons
+        function updateToggleButtons(theme) {
+            const buttons = document.querySelectorAll('.theme-toggle, .theme-toggle-bottom');
+            buttons.forEach(btn => {
+                const icon = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+                btn.innerHTML = icon;
+            });
+        }
+
+        // Toggle theme function
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            // Save to localStorage
             localStorage.setItem('theme', newTheme);
-            themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            
+            // Apply theme
+            if (newTheme === 'dark') {
+                html.setAttribute('data-bs-theme', 'dark');
+                html.style.colorScheme = 'dark';
+            } else {
+                html.removeAttribute('data-bs-theme');
+                html.style.colorScheme = 'light';
+            }
+            
+            // Update buttons
+            updateToggleButtons(newTheme);
+        }
+
+        // Initialize theme when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeTheme);
+        } else {
+            initializeTheme();
+        }
+
+        // Add click listeners to all theme toggle buttons
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.theme-toggle') || e.target.closest('.theme-toggle-bottom')) {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleTheme();
+            }
         });
 
         // Smooth scroll for anchor links
@@ -550,37 +614,6 @@
         document.querySelectorAll('.card').forEach(card => {
             observer.observe(card);
         });
+
+        console.log('✓ JavaScript loaded and toggle initialized');
     </script>
-</body>
-</html>
-                </ul>
-            </div>
-        @endif
-
-        @yield('content')
-    </main>
-
-    <!-- Bootstrap JS (CDN) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
-
-    <script>
-        // Right-click the brand to toggle the offcanvas menu (keeps it visually behind the navbar)
-        document.addEventListener('DOMContentLoaded', function() {
-            var brand = document.getElementById('brandTitle');
-            if (!brand) return;
-
-            brand.addEventListener('contextmenu', function(e) {
-                e.preventDefault(); // suppress browser context menu on brand
-                var offcanvasEl = document.getElementById('offcanvasSidebar');
-                if (!offcanvasEl) return;
-                var instance = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
-                if (offcanvasEl.classList.contains('show')) {
-                    instance.hide();
-                } else {
-                    instance.show();
-                }
-            });
-        });
-    </script>
-</body>
-</html>

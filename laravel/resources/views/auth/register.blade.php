@@ -41,10 +41,11 @@
                         value="{{ old('name') }}" 
                         placeholder="John Doe"
                         required
+                        autocomplete="name"
                         style="border-radius: 8px; border: 2px solid #e9ecef; transition: all 0.3s ease;"
                     >
                     @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -61,10 +62,11 @@
                         value="{{ old('email') }}" 
                         placeholder="you@example.com"
                         required
+                        autocomplete="email"
                         style="border-radius: 8px; border: 2px solid #e9ecef; transition: all 0.3s ease;"
                     >
                     @error('email')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -80,10 +82,11 @@
                         name="password" 
                         placeholder="Create a strong password"
                         required
+                        autocomplete="new-password"
                         style="border-radius: 8px; border: 2px solid #e9ecef; transition: all 0.3s ease;"
                     >
                     <small class="form-text text-muted d-block mt-2">
-                        <i class="fas fa-info-circle me-1"></i>At least 8 characters, with uppercase, lowercase, and numbers
+                        <i class="fas fa-info-circle me-1"></i>Minimum 8 characters, with uppercase, lowercase, and numbers
                     </small>
                     @error('password')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -96,14 +99,18 @@
                         <i class="fas fa-check-circle me-2" style="color: #198754;"></i>Confirm Password
                     </label>
                     <input 
-                        class="form-control form-control-lg" 
+                        class="form-control form-control-lg @error('password_confirmation') is-invalid @enderror" 
                         type="password" 
                         id="password_confirmation"
                         name="password_confirmation" 
                         placeholder="Confirm your password"
                         required
+                        autocomplete="new-password"
                         style="border-radius: 8px; border: 2px solid #e9ecef; transition: all 0.3s ease;"
                     >
+                    @error('password_confirmation')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- Terms Checkbox -->
@@ -113,6 +120,8 @@
                         type="checkbox" 
                         name="terms" 
                         id="terms"
+                        value="1"
+                        {{ old('terms') ? 'checked' : '' }}
                         style="cursor: pointer; width: 20px; height: 20px;"
                     >
                     <label class="form-check-label" for="terms" style="cursor: pointer;">
