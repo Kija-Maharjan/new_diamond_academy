@@ -479,7 +479,7 @@
         }
     </style>
     </head>
-    <body class="{{ (request()->routeIs('login') || request()->routeIs('recommendations.*')) ? 'keep-dark' : '' }}">
+    <body class="{{ (request()->routeIs('login') || request()->routeIs('register') || request()->routeIs('recommendations.*')) ? 'keep-dark' : '' }}">
     <!-- Navbar Collapse Content -->
     <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
         <div class="p-4" style="background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);">
