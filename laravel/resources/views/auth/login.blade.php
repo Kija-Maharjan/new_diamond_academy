@@ -145,40 +145,18 @@
         box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
     }
 
-    .btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    .form-check-input {
+        cursor: pointer;
     }
 
-    .auth-form {
-        animation: slideUp 0.5s ease-out;
+    .form-check-input:not(:checked) {
+        background-color: #fff;
+        border: 2px solid #dee2e6;
     }
 
-    @keyframes slideUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-</style>
-@endsection
-
-            <!-- Footer Info -->
-            <p class="text-center text-muted mt-4 small">
-                <i class="fas fa-lock me-1"></i>Your data is secure and encrypted
-            </p>
-        </div>
-    </div>
-</div>
-
-<style>
-    .form-control:focus {
-        border-color: #0d6efd !important;
-        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25) !important;
+    .form-check-input:checked {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
     }
 
     .btn:hover {

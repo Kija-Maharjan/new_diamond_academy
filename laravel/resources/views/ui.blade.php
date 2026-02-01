@@ -19,11 +19,8 @@
     <style>
         :root {
             --primary-color: #0d6efd;
-            --secondary-color: #6c757d;
-            --success-color: #198754;
-            --danger-color: #dc3545;
-            --dark-color: #212529;
-            --light-color: #f8f9fa;
+            --accent-color: #198754;
+            --neutral-color: #6c757d;
         }
 
         * {
@@ -32,15 +29,16 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: url('{{ asset("resources/views/nda_image/nda_bg_image.1.jpg") }}') center/cover fixed;
             min-height: 100vh;
         }
 
         /* Navbar Animations */
         .navbar {
             z-index: 1200 !important;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
             animation: slideDown 0.5s ease-out;
+            background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%) !important;
         }
 
         @keyframes slideDown {
@@ -97,6 +95,21 @@
             animation: slideUp 0.5s ease-out;
             border: 0;
             border-radius: 8px;
+            background: rgba(255, 255, 255, 0.98) !important;
+            color: #212529 !important;
+            border-left: 4px solid #0d6efd;
+        }
+
+        .alert-success {
+            border-left-color: #198754 !important;
+        }
+
+        .alert-danger {
+            border-left-color: #0d6efd !important;
+        }
+
+        .alert-info {
+            border-left-color: #6c757d !important;
         }
 
         @keyframes slideUp {
@@ -114,6 +127,23 @@
         .container {
             animation: fadeIn 0.6s ease-out;
         }
+        
+        main.container {
+            background: transparent;
+            padding: 0 1rem;
+            border-radius: 0;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 1200px;
+        }
+
+        .row {
+            margin-bottom: 3rem;
+        }
+
+        .col-12, .col-md-4, .col-lg-6 {
+            margin-bottom: 2rem;
+        }
 
         @keyframes fadeIn {
             from {
@@ -127,11 +157,12 @@
         /* Card Animations */
         .card {
             border: 0;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.98) !important;
             overflow: hidden;
             animation: cardSlide 0.6s ease-out;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         @keyframes cardSlide {
@@ -146,8 +177,8 @@
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            transform: translateY(-12px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
         }
 
         .card-img-top {
@@ -158,12 +189,16 @@
         /* Button Animations */
         .btn {
             border: 0;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 600;
-            padding: 0.6rem 1.4rem;
+            padding: 0.7rem 1.6rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .btn::before {
@@ -185,27 +220,85 @@
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
         }
 
         .btn-primary:hover {
             background: linear-gradient(135deg, #0b5ed7 0%, #0a58ca 100%);
+            color: white;
         }
 
-        /* Link Hover Effects */
-        a {
-            text-decoration: none;
+        .btn-success {
+            background: linear-gradient(135deg, #198754 0%, #157347 100%);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+
+        .btn-success:hover {
+            background: linear-gradient(135deg, #157347 0%, #146c43 100%);
+            color: white;
+        }
+
+        .btn-outline-primary {
+            color: #0d6efd;
+            border: 2px solid #0d6efd;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+
+        .btn-outline-primary:hover {
+            background: #0d6efd;
+            color: white;
+            border-color: #0d6efd
+            background: linear-gradient(135deg, #0b5ed7 0%, #0a58ca 100%);
+        }
+
+        /* Form controls */
+        .form-control, .form-select {
+            border: 2px solid #dee2e6 !important;
+            border-radius: 8px !important;
+            padding: 0.75rem 1rem !important;
+            color: #212529 !important;
+            background: rgba(255, 255, 255, 0.99) !important;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #0d6efd !important;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25) !important;
+            color: #212529;
+        }
+
+        .form-label {
+            color: #212529 !important;
+            font-weight: 600 !important;
+            margin-bottom: 0.5rem;
+        }
+
+        .text-muted {
+            color: #6c757d !importantnone;
             position: relative;
+            color: #0d6efd;
+        }
+
+        a:hover {
+            color: #0b5ed7;
         }
 
         a.nav-link {
             position: relative;
             overflow: hidden;
+            color: white !important;
         }
 
         a.nav-link::after {
@@ -230,11 +323,25 @@
 
         /* Content wrapper */
         .content-wrapper {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+            background: rgba(255, 255, 255, 0.99);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
             margin-bottom: 2rem;
+            border-left: 6px solid #0d6efd;
+            transition: all 0.3s ease;
+        }
+
+        .content-wrapper:hover {
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+
+        .content-wrapper h1, .content-wrapper h2, .content-wrapper h3 {
+            color: #212529 !important;
+        }
+
+        .content-wrapper p {
+            color: #495057 !important;
         }
 
         /* Smooth scroll behavior */
@@ -284,34 +391,6 @@
             }
         }
 
-        /* Theme toggle button styling */
-        .theme-toggle {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 999;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
-            border: 0;
-            color: white;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-            color: white;
-        }
-
         /* Dark mode support */
         @media (prefers-color-scheme: dark) {
             body {
@@ -341,6 +420,57 @@
             .btn-close {
                 filter: invert(1);
             }
+        }
+
+        /* Text color improvements */
+        h1, h2, h3, h4, h5, h6 {
+            color: #212529 !important;
+            font-weight: 700 !important;
+        }
+
+        .card-title, .card-text {
+            color: #212529 !important;
+            font-weight: 600 !important;
+        }
+
+        .card-text {
+            font-size: 1rem !important;
+            line-height: 1.6 !important;
+            color: #495057 !important;
+        }
+
+        .feature-icon {
+            color: #0d6efd !important;
+            font-size: 3rem !important;
+        }
+
+        p {
+            color: #495057 !important;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background: rgba(255, 255, 255, 0.99) !important;
+            color: #212529 !important;
+            border: 0 !important;
+            text-align: center;
+            padding: 2rem 1.5rem !important;
+        }
+
+        .feature-card .card-title {
+            color: #212529 !important;
+        }
+
+        .feature-card .card-text {
+            color: #6c757d !important;
+        }
+
+        .feature-card .feature-icon {
+            color: #0d6efd !important;
+        }
+
+        .feature-card .btn {
+            margin-top: 1rem;
         }
     </style>
 </head>
@@ -422,7 +552,7 @@
                 </div>
             @endauth
         </div>
-
+    </nav>
 
     <!-- Main Content -->
     <main class="container mt-4 pb-5">
@@ -457,134 +587,11 @@
         @yield('content')
     </main>
 
-    <!-- Bottom Navigation / Footer -->
-    <footer class="bg-primary text-white py-3 mt-5">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <!-- Go Back Button -->
-                <div class="col-auto">
-                    <button class="btn btn-light btn-sm" onclick="window.history.back()" title="Go Back">
-                        <i class="fas fa-arrow-left me-1"></i>Go Back
-                    </button>
-                </div>
-
-                <!-- Navigation Links -->
-                <div class="col">
-                    <nav class="d-flex gap-3 flex-wrap ms-3">
-                        <a href="{{ url('/') }}" class="text-white text-decoration-none small">
-                            <i class="fas fa-home me-1"></i>Home
-                        </a>
-                        <a href="{{ route('slider') }}" class="text-white text-decoration-none small">
-                            <i class="fas fa-images me-1"></i>Slider
-                        </a>
-                        <a href="{{ route('news.index') }}" class="text-white text-decoration-none small">
-                            <i class="fas fa-newspaper me-1"></i>News
-                        </a>
-                        <a href="{{ route('recommendations.create') }}" class="text-white text-decoration-none small">
-                            <i class="fas fa-star me-1"></i>Recommend
-                        </a>
-                        @guest
-                            <a href="{{ route('login') }}" class="text-white text-decoration-none small">
-                                <i class="fas fa-sign-in-alt me-1"></i>Login
-                            </a>
-                        @else
-                            @if(auth()->user()->is_admin)
-                                <a href="{{ route('admin') }}" class="text-white text-decoration-none small">
-                                    <i class="fas fa-lock me-1"></i>Admin
-                                </a>
-                            @endif
-                        @endguest
-                    </nav>
-                </div>
-
-                <!-- Theme Toggle at Right -->
-                <div class="col-auto">
-                    <button class="btn btn-light btn-sm theme-toggle-bottom" title="Toggle Dark Mode">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Copyright -->
-            <div class="text-center mt-3 small text-white-50">
-                <p class="mb-0">&copy; 2026 New Diamond Academy. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Theme Toggle Button (Floating) -->
-    <a href="{{ route('login') }}" class="theme-toggle" title="Join with us">
-        <i class="fas fa-user-plus"></i>
-    </a>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     
     <!-- Custom JS for animations and interactivity -->
     <script>
-        // Initialize theme on page load
-        function initializeTheme() {
-            const html = document.documentElement;
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            
-            // Apply the theme
-            if (savedTheme === 'dark') {
-                html.setAttribute('data-bs-theme', 'dark');
-                html.style.colorScheme = 'dark';
-            } else {
-                html.removeAttribute('data-bs-theme');
-                html.style.colorScheme = 'light';
-            }
-            
-            updateToggleButtons(savedTheme);
-        }
-
-        // Update theme toggle buttons
-        function updateToggleButtons(theme) {
-            const buttons = document.querySelectorAll('.theme-toggle, .theme-toggle-bottom');
-            buttons.forEach(btn => {
-                const icon = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-                btn.innerHTML = icon;
-            });
-        }
-
-        // Toggle theme function
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = localStorage.getItem('theme') || 'light';
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            // Save to localStorage
-            localStorage.setItem('theme', newTheme);
-            
-            // Apply theme
-            if (newTheme === 'dark') {
-                html.setAttribute('data-bs-theme', 'dark');
-                html.style.colorScheme = 'dark';
-            } else {
-                html.removeAttribute('data-bs-theme');
-                html.style.colorScheme = 'light';
-            }
-            
-            // Update buttons
-            updateToggleButtons(newTheme);
-        }
-
-        // Initialize theme when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeTheme);
-        } else {
-            initializeTheme();
-        }
-
-        // Add click listeners to all theme toggle buttons
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('.theme-toggle') || e.target.closest('.theme-toggle-bottom')) {
-                e.preventDefault();
-                e.stopPropagation();
-                toggleTheme();
-            }
-        });
-
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -615,5 +622,5 @@
             observer.observe(card);
         });
 
-        console.log('✓ JavaScript loaded and toggle initialized');
+        console.log('✓ JavaScript loaded');
     </script>

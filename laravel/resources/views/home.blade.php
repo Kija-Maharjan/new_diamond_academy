@@ -1,174 +1,159 @@
 @extends('ui')
 
 @section('content')
-<div class="row mb-5">
-    <!-- Hero Section -->
-    <div class="col-12">
-        <div class="card border-0 bg-gradient" style="background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%); color: white; padding: 4rem 2rem;">
-            <div class="card-body text-center">
-                <h1 class="display-4 fw-bold mb-3" style="animation: slideDown 0.6s ease-out;">
-                    <i class="fas fa-graduation-cap me-3"></i>Welcome to New Diamond Academy
-                </h1>
-                <p class="lead mb-4" style="animation: slideUp 0.8s ease-out;">
-                    A space for students, teachers, and founders to connect, share, and grow together
-                </p>
-                <div class="d-flex gap-3 justify-content-center flex-wrap" style="animation: fadeIn 1s ease-out;">
-                    <a class="btn btn-light btn-lg fw-bold" href="{{ route('news.index') }}" role="button">
-                        <i class="fas fa-newspaper me-2"></i>View Student News
-                    </a>
-                    <a class="btn btn-outline-light btn-lg fw-bold" href="{{ route('slider') }}" role="button">
-                        <i class="fas fa-images me-2"></i>Meet Our Community
-                    </a>
-                </div>
-            </div>
+<!-- Bento Box Container -->
+<div class="bento-box-container" style="padding: 2rem 0; max-width: 1300px; margin: 0 auto;">
+    <!-- Welcome Section (Large) -->
+    <a href="{{ route('about.index') }}" class="bento-box-item bento-large" style="background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%); color: white; text-decoration: none; grid-column: 1 / 3; grid-row: 1 / 3;">
+        <div class="bento-content">
+            <i class="fas fa-crown" style="font-size: 4rem; margin-bottom: 1rem; display: block;"></i>
+            <h1 style="font-size: 2.8rem; margin-bottom: 1rem; font-weight: 800;">Welcome to<br>New Diamond Academy</h1>
+            <p style="font-size: 1.1rem; opacity: 0.9;">A premier space where students, teachers, and founders connect, collaborate, and grow together</p>
         </div>
-    </div>
-</div>
+    </a>
 
-<!-- Features Section -->
-<div class="row mb-5">
-    <div class="col-md-4 mb-3">
-        <div class="card h-100 feature-card">
-            <div class="card-body text-center">
-                <div class="feature-icon mb-3" style="font-size: 3rem; color: #0d6efd;">
-                    <i class="fas fa-book-open"></i>
-                </div>
-                <h5 class="card-title fw-bold">Student News</h5>
-                <p class="card-text text-muted">
-                    Stay updated with the latest news, achievements, and announcements from our student community.
-                </p>
-                <a href="{{ route('news.index') }}" class="btn btn-primary btn-sm">
-                    <i class="fas fa-arrow-right me-1"></i>Explore
-                </a>
-            </div>
+    <!-- Student News (Large - Same width as Welcome) -->
+    <a href="{{ route('news.index') }}" class="bento-box-item bento-large" style="background: linear-gradient(135deg, rgba(13, 110, 253, 0.1) 0%, rgba(13, 110, 253, 0.05) 100%); border: 2px solid #0d6efd; color: #0d6efd; text-decoration: none; grid-column: 3 / 5; grid-row: 1 / 3;">
+        <div class="bento-content">
+            <i class="fas fa-book-open" style="font-size: 2.5rem; margin-bottom: 1rem; display: block;"></i>
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 700;">Student News</h3>
+            <p style="font-size: 0.95rem;">Latest updates & achievements</p>
         </div>
-    </div>
+    </a>
 
-    <div class="col-md-4 mb-3">
-        <div class="card h-100 feature-card">
-            <div class="card-body text-center">
-                <div class="feature-icon mb-3" style="font-size: 3rem; color: #198754;">
-                    <i class="fas fa-star"></i>
-                </div>
-                <h5 class="card-title fw-bold">Recommendations</h5>
-                <p class="card-text text-muted">
-                    Share recommendations and feedback to help improve our academy and support fellow members.
-                </p>
-                <a href="{{ route('recommendations.create') }}" class="btn btn-success btn-sm">
-                    <i class="fas fa-arrow-right me-1"></i>Share
-                </a>
-            </div>
+    <!-- Recommendations (Large - Below Student News) -->
+    <a href="{{ route('recommendations.create') }}" class="bento-box-item bento-large" style="background: linear-gradient(135deg, rgba(25, 135, 84, 0.1) 0%, rgba(25, 135, 84, 0.05) 100%); border: 2px solid #198754; color: #198754; text-decoration: none; grid-column: 3 / 5; grid-row: 3 / 4;">
+        <div class="bento-content">
+            <i class="fas fa-star" style="font-size: 2.5rem; margin-bottom: 1rem; display: block;"></i>
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 700;">Recommendations</h3>
+            <p style="font-size: 0.95rem;">Share your feedback</p>
         </div>
-    </div>
+    </a>
 
-    <div class="col-md-4 mb-3">
-        <div class="card h-100 feature-card">
-            <div class="card-body text-center">
-                <div class="feature-icon mb-3" style="font-size: 3rem; color: #0dcaf0;">
-                    <i class="fas fa-people-line"></i>
-                </div>
-                <h5 class="card-title fw-bold">Meet The Team</h5>
-                <p class="card-text text-muted">
-                    Connect with teachers, founders, and mentors who are shaping the future of education.
-                </p>
-                <a href="{{ route('slider') }}" class="btn btn-info btn-sm">
-                    <i class="fas fa-arrow-right me-1"></i>Connect
-                </a>
-            </div>
+    <!-- Community (Medium) -->
+    <a href="{{ route('slider') }}" class="bento-box-item bento-medium" style="background: linear-gradient(135deg, rgba(13, 202, 240, 0.1) 0%, rgba(13, 202, 240, 0.05) 100%); border: 2px solid #0dcaf0; color: #0dcaf0; text-decoration: none; grid-column: 1 / 3; grid-row: 3 / 4;">
+        <div class="bento-content">
+            <i class="fas fa-people-line" style="font-size: 2.5rem; margin-bottom: 1rem; display: block;"></i>
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 700;">Meet The Team</h3>
+            <p style="font-size: 0.95rem;">Connect with mentors</p>
         </div>
-    </div>
-</div>
+    </a>
 
-<!-- CTA Section -->
-<div class="row mb-5">
-    <div class="col-12">
-        <div class="card border-0" style="background: linear-gradient(135deg, #198754 0%, #157347 100%); color: white;">
-            <div class="card-body text-center py-5">
-                <h3 class="fw-bold mb-3">
-                    <i class="fas fa-handshake me-2"></i>Join Our Community
-                </h3>
-                <p class="mb-4">
-                    Sign up or log in to participate in discussions, share news, and make recommendations.
-                </p>
-                @guest
-                    <div class="d-flex gap-2 justify-content-center flex-wrap">
-                        <a class="btn btn-light btn-lg fw-bold" href="{{ route('login') }}">
-                            <i class="fas fa-sign-in-alt me-2"></i>Sign In
-                        </a>
-                        <a class="btn btn-outline-light btn-lg fw-bold" href="{{ route('register') }}">
-                            <i class="fas fa-user-plus me-2"></i>Create Account
-                        </a>
-                    </div>
-                @else
-                    <p class="fw-bold">Welcome back, {{ auth()->user()->name }}!</p>
-                @endguest
+    <!-- Statistics (Small Cards Row 2) - Only for Admins -->
+    @if(auth()->check() && auth()->user()->is_admin)
+        <a href="{{ url('/') }}" class="bento-box-item bento-small" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none;">
+            <div class="bento-content">
+                <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">{{ \App\Models\User::count() }}</div>
+                <p style="font-size: 0.85rem;">Total Members</p>
             </div>
-        </div>
-    </div>
-</div>
+        </a>
 
-<!-- Statistics Section -->
-<div class="row mb-5">
-    <div class="col-12">
-        <h3 class="mb-4 fw-bold text-center">
-            <i class="fas fa-chart-bar me-2"></i>Academy Statistics
-        </h3>
-    </div>
-    <div class="col-md-3 col-sm-6 mb-3">
-        <div class="card stats-card text-center">
-            <div class="card-body">
-                <h4 class="text-primary fw-bold">
-                    {{ \App\Models\User::count() }}
-                </h4>
-                <p class="text-muted">Total Members</p>
+        <a href="{{ route('news.index') }}" class="bento-box-item bento-small" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; text-decoration: none;">
+            <div class="bento-content">
+                <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">{{ \App\Models\News::count() }}</div>
+                <p style="font-size: 0.85rem;">News Articles</p>
             </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-6 mb-3">
-        <div class="card stats-card text-center">
-            <div class="card-body">
-                <h4 class="text-success fw-bold">
-                    {{ \App\Models\News::count() }}
-                </h4>
-                <p class="text-muted">News Articles</p>
+        </a>
+
+        <a href="{{ route('recommendations.create') }}" class="bento-box-item bento-small" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; text-decoration: none;">
+            <div class="bento-content">
+                <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">{{ \App\Models\Recommendation::count() }}</div>
+                <p style="font-size: 0.85rem;">Recommendations</p>
             </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-6 mb-3">
-        <div class="card stats-card text-center">
-            <div class="card-body">
-                <h4 class="text-info fw-bold">
-                    {{ \App\Models\Recommendation::count() }}
-                </h4>
-                <p class="text-muted">Recommendations</p>
+        </a>
+
+        <a href="{{ route('admin') }}" class="bento-box-item bento-small" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; text-decoration: none;">
+            <div class="bento-content">
+                <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">{{ \App\Models\User::where('is_admin', true)->count() }}</div>
+                <p style="font-size: 0.85rem;">Administrators</p>
             </div>
+        </a>
+    @endif
+
+    @if(!auth()->check())
+    <!-- Login Call to Action (Full Width at Bottom) -->
+    <a href="{{ route('login') }}" class="bento-box-item bento-full-width" style="background: linear-gradient(135deg, #198754 0%, #157347 100%); color: white; text-decoration: none; grid-column: 1 / 5; grid-row: 4 / 5; margin-top: 1rem;">
+        <div class="bento-content">
+            <i class="fas fa-sign-in-alt" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
+            <h3 style="font-size: 2rem; margin-bottom: 1rem; font-weight: 800;">Join Us</h3>
+            <p style="font-size: 1rem; margin-bottom: 1.5rem;">Sign in to unlock exclusive features</p>
+            <button class="btn btn-light btn-sm" style="border-radius: 8px;">Click Here</button>
         </div>
-    </div>
-    <div class="col-md-3 col-sm-6 mb-3">
-        <div class="card stats-card text-center">
-            <div class="card-body">
-                <h4 class="text-warning fw-bold">
-                    {{ \App\Models\User::where('is_admin', true)->count() }}
-                </h4>
-                <p class="text-muted">Administrators</p>
-            </div>
-        </div>
-    </div>
+    </a>
+    @endif
 </div>
 
 <style>
-    @keyframes slideDown {
-        from {
-            opacity: 0;
-            transform: translateY(-20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .bento-box-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        grid-auto-rows: 250px;
     }
 
-    @keyframes slideUp {
+    .bento-box-item {
+        border-radius: 20px;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .bento-box-item:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .bento-box-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at top right, rgba(255,255,255,0.2), transparent);
+        pointer-events: none;
+    }
+
+    .bento-content {
+        position: relative;
+        z-index: 1;
+        padding: 2rem;
+        width: 100%;
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    .bento-large {
+        grid-column: 1 / 3;
+        grid-row: 1 / 3;
+        grid-auto-rows: 250px;
+    }
+
+    .bento-medium {
+        grid-column: span 1;
+    }
+
+    .bento-small {
+        grid-row: span 1;
+    }
+
+    .bento-tall {
+        grid-row: 2 / 4;
+    }
+
+    .bento-full-width {
+        grid-column: 1 / -1;
+        height: 180px;
+        margin: 1rem 0;
+        padding: 1.5rem;
+    }
+
+    @keyframes fadeInUp {
         from {
             opacity: 0;
             transform: translateY(20px);
@@ -179,43 +164,58 @@
         }
     }
 
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
+    @media (max-width: 1024px) {
+        .bento-box-container {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            grid-auto-rows: 200px;
         }
-        to {
-            opacity: 1;
+
+        .bento-large {
+            grid-column: 1 / 3;
+            grid-row: 1 / 2;
+        }
+
+        .bento-tall {
+            grid-column: 1 / 3;
+            grid-row: auto;
+        }
+
+        .bento-full-width {
+            grid-column: 1 / -1;
+            height: 160px;
+            margin: 1rem 0;
         }
     }
 
-    .feature-card {
-        transition: all 0.3s ease;
-        border: 0;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+    @media (max-width: 768px) {
+        .bento-box-container {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            grid-auto-rows: 180px;
+        }
 
-    .feature-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
+        .bento-large,
+        .bento-tall,
+        .bento-medium,
+        .bento-full-width {
+            grid-column: 1 !important;
+            grid-row: auto !important;
+        }
 
-    .feature-icon {
-        transition: all 0.3s ease;
-    }
+        .bento-content {
+            padding: 1.5rem;
+        }
 
-    .feature-card:hover .feature-icon {
-        transform: scale(1.15) rotate(5deg);
-    }
+        .bento-box-item:hover {
+            transform: translateY(-8px) scale(1.01);
+        }
 
-    .stats-card {
-        border: 0;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        transition: all 0.3s ease;
-    }
-
-    .stats-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        .bento-full-width {
+            height: auto;
+            min-height: 140px;
+        }
     }
 </style>
+
 @endsection

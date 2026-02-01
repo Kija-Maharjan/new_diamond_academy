@@ -3,13 +3,24 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AboutController;
 
 Route::get('/', function () {
+    return view('landing');
+});
+
+// Home page
+Route::get('/home', function () {
     return view('home', [
         'title' => 'New Diamond Academy',
         'headerTitle' => 'New Diamond Academy'
     ]);
-});
+})->name('home');
+
+// About page
+Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+Route::get('/about/edit', [AboutController::class, 'edit'])->middleware('admin')->name('about.edit');
+Route::put('/about', [AboutController::class, 'update'])->middleware('admin')->name('about.update');
 
 // Auth
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
