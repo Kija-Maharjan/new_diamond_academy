@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AboutController;
 
 Route::get('/', function () {
-    return view('landing');
+    return redirect('/home');
 });
 
 // Home page

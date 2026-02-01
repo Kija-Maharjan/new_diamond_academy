@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Admin user for testing
-        \App\Models\User::create([
+        User::create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
             'password' => bcrypt('password'),

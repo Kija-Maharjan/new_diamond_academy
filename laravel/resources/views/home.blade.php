@@ -82,6 +82,52 @@
     @endif
 </div>
 
+<!-- Social Media Links Table -->
+{{-- <div style="max-width: 1300px; margin: 3rem auto; padding: 0 2rem;">
+    <table style="width: 100%; border-collapse: collapse; margin: 0; padding: 0; border: none;">
+        <tbody>
+            <tr style="margin: 0; padding: 0; border: none;">
+                <td style="margin: 0; padding: 0.5rem 1rem; border: none; text-align: center;">
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #3b5998; font-weight: 600; font-size: 0.95rem;">
+                        <i class="fab fa-facebook-f" style="font-size: 1.5rem; display: block; margin-bottom: 0.25rem;"></i>
+                        Facebook
+                    </a>
+                </td>
+                <td style="margin: 0; padding: 0.5rem 1rem; border: none; text-align: center;">
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #1da1f2; font-weight: 600; font-size: 0.95rem;">
+                        <i class="fab fa-twitter" style="font-size: 1.5rem; display: block; margin-bottom: 0.25rem;"></i>
+                        Twitter
+                    </a>
+                </td>
+                <td style="margin: 0; padding: 0.5rem 1rem; border: none; text-align: center;">
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #e4405f; font-weight: 600; font-size: 0.95rem;">
+                        <i class="fab fa-instagram" style="font-size: 1.5rem; display: block; margin-bottom: 0.25rem;"></i>
+                        Instagram
+                    </a>
+                </td>
+                <td style="margin: 0; padding: 0.5rem 1rem; border: none; text-align: center;">
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #0077b5; font-weight: 600; font-size: 0.95rem;">
+                        <i class="fab fa-linkedin-in" style="font-size: 1.5rem; display: block; margin-bottom: 0.25rem;"></i>
+                        LinkedIn
+                    </a>
+                </td>
+                <td style="margin: 0; padding: 0.5rem 1rem; border: none; text-align: center;">
+                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff0000; font-weight: 600; font-size: 0.95rem;">
+                        <i class="fab fa-youtube" style="font-size: 1.5rem; display: block; margin-bottom: 0.25rem;"></i>
+                        YouTube
+                    </a>
+                </td>
+                <td style="margin: 0; padding: 0.5rem 1rem; border: none; text-align: center;">
+                    <a href="mailto:contact@example.com" style="text-decoration: none; color: #d32f2f; font-weight: 600; font-size: 0.95rem;">
+                        <i class="fas fa-envelope" style="font-size: 1.5rem; display: block; margin-bottom: 0.25rem;"></i>
+                        Email
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> --}}
+
 <style>
     .bento-box-container {
         display: grid;
