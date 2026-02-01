@@ -91,11 +91,11 @@
                         type="checkbox" 
                         name="remember" 
                         id="remember"
+                        value="1"
+                        {{ old('remember') ? 'checked' : '' }}
                         style="cursor: pointer; width: 20px; height: 20px;"
                     >
-                    <label class="form-check-label" for="remember" style="cursor: pointer;">
-                        <i class="fas fa-check-square me-1" style="color: #0d6efd;"></i>Remember me
-                    </label>
+                    <label class="form-check-label" for="remember" style="cursor: pointer;">Remember me</label>
                 </div>
 
                 <!-- Login Button -->
@@ -111,7 +111,7 @@
             <!-- Divider -->
             <div class="my-4 text-center">
                 <hr>
-                <span class="text-muted small">New to Academy?</span>
+                <span class="text-muted small">New here?</span>
             </div>
 
             <!-- Registration Link -->

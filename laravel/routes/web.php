@@ -22,6 +22,8 @@ Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/about/edit', [AboutController::class, 'edit'])->middleware('admin')->name('about.edit');
 Route::put('/about', [AboutController::class, 'update'])->middleware('admin')->name('about.update');
 
+use Illuminate\Http\Request;
+
 // Auth
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');

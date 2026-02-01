@@ -27,6 +27,11 @@
             transition: all 0.3s ease;
         }
 
+        /* Global white text by default. Pages that need dark text should add body.keep-dark class. */
+        body:not(.keep-dark), body:not(.keep-dark) * {
+            color: #ffffff !important;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: url('{{ asset("resources/views/nda_image/nda_bg_image.1.jpg") }}') center/cover fixed;
@@ -473,11 +478,11 @@
             margin-top: 1rem;
         }
     </style>
-</head>
-<body>
+    </head>
+    <body class="{{ (request()->routeIs('login') || request()->routeIs('recommendations.*')) ? 'keep-dark' : '' }}">
     <!-- Navbar Collapse Content -->
     <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="dark">
-        <div class="bg-primary p-4">
+        <div class="p-4" style="background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);">
             <h5 class="text-white h4"><i class="fas fa-bars me-2"></i>Navigation</h5>
             <ul class="nav flex-column gap-2">
                 <li class="nav-item">
@@ -513,6 +518,7 @@
             </ul>
         </div>
     </div>
+    
 
     <!-- Navbar -->
     <nav class="navbar navbar-dark bg-primary fixed-top">
@@ -624,3 +630,5 @@
 
         console.log('✓ JavaScript loaded');
     </script>
+
+    

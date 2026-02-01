@@ -77,7 +77,6 @@
             <i class="fas fa-sign-in-alt" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
             <h3 style="font-size: 2rem; margin-bottom: 1rem; font-weight: 800;">Join Us</h3>
             <p style="font-size: 1rem; margin-bottom: 1.5rem;">Sign in to unlock exclusive features</p>
-            <button class="btn btn-light btn-sm" style="border-radius: 8px;">Click Here</button>
         </div>
     </a>
     @endif
