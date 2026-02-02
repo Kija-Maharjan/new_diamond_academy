@@ -5,6 +5,15 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AboutController;
 
+// Fallback route for favicon (serves public/favicon.ico if static serving misses it)
+Route::get('/favicon.ico', function () {
+    $path = public_path('favicon.ico');
+    if (!file_exists($path)) {
+        abort(404);
+    }
+    return response()->file($path);
+});
+
 Route::get('/', function () {
     return redirect('/home');
 });
